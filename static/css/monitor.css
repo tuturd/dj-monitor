@@ -1,0 +1,44 @@
+body {
+    height: 100vh;
+    margin: 0;
+    background: #111;
+}
+
+main {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body div {
+    color: #fff;
+    font-size: 20vw;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-align: center;
+    width: 100vw;
+}
+
+main.has-text {
+    justify-content: space-between;
+}
+
+main.has-text #text_container {
+    font-size: 20vw;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+main.has-text #clock_container {
+    font-size: 3vw;
+    margin-bottom: 2vw;
+    color: #ccc;
+}
+
+main:not(.has-text) #clock_container {
+    font-size: 20vw;
+    margin: auto 0;
+    color: #fff;
+}

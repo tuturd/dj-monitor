@@ -1,0 +1,6 @@
+services:
+  dj-monitor:
+    image: ghcr.io/tuturd/dj-monitor:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
