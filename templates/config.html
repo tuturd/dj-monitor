@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Configuration</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/config.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="{{ url_for('static', filename='js/config.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -16,6 +17,18 @@
 <body class="bg-dark text-light">
     <div class="container mt-5">
         <h1 class="mb-4">Page de configuration</h1>
+        <div class="card border-0 shadow-none mb-4 bg-transparent">
+            <div class="card-body p-0">
+                <section id="clock-section">
+                    <h1 id="clock" class="text-center text-light user-select-none" style="font-size:10rem;">
+                        --:--:--
+                    </h1>
+                    <h2 id="countdown" class="text-center text-light user-select-none" style="font-size:7rem;">
+                        --:--
+                    </h2>
+                </section>
+            </div>
+        </div>
         <div class="card shadow bg-secondary text-light">
             <div class="card-body">
                 <form id="configForm">
@@ -59,47 +72,48 @@
         </div>
 
         <div class="card mt-3 shadow bg-secondary text-light">
-            <div class="card-body">
-                <h2 class="card-title">Aperçu du moniteur</h2>
-                <iframe src="/monitor" width="100%" height="300" class="border rounded"
-                    style="border:1px solid #ccc; background-color:#222;"></iframe>
-                <div class="d-flex justify-content-center">
-                    <a href="/monitor" class="btn btn-outline-light mt-3">Ouvrir la page /monitor</a>
+            <div class="card-header" style="cursor:pointer;" data-bs-toggle="collapse" data-bs-target="#scheduleCard"
+                aria-expanded="false" aria-controls="scheduleCard">
+                <h2 class="mb-0">Horaire de fin de set <span class="float-end"><i class="bi bi-chevron-down"></i></span>
+                </h2>
+            </div>
+            <div id="scheduleCard" class="collapse">
+                <div class="card-body">
+                    <form id="scheduleForm">
+                        <h3 class="mb-3">Formulaire d'horaire de fin de set</h3>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="date" class="form-label">Date :</label>
+                                <input type="date" id="date" name="date"
+                                    class="form-control form-control-lg bg-dark text-light"
+                                    value="{{ current_end_date }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="time" class="form-label">Horaire :</label>
+                                <input type="time" id="time" name="time"
+                                    class="form-control form-control-lg bg-dark text-light"
+                                    value="{{ current_end_time }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="number" class="form-label">Minutes orange :</label>
+                                <input type="number" id="warningMinutes" name="warningMinutes"
+                                    class="form-control form-control-lg bg-dark text-light"
+                                    value="{{ current_warning_minutes }}">
+                            </div>
+                        </div>
+                        <p class="text-warning text-center mb-2">Attention, l'écran clignottera selon les paramètres
+                            définis
+                            dans la section principale.</p>
+                        <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <div class="card mt-3 shadow bg-secondary text-light">
-            <div class="card-body">
-                <h2 class="card-title">Horaire de fin de set</h2>
-                <form id="scheduleForm">
-                    <h3 class="mb-3">Formulaire d'horaire de fin de set</h3>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="date" class="form-label">Date :</label>
-                            <input type="date" id="date" name="date"
-                                class="form-control form-control-lg bg-dark text-light" value="{{ current_end_date }}">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="time" class="form-label">Horaire :</label>
-                            <input type="time" id="time" name="time"
-                                class="form-control form-control-lg bg-dark text-light" value="{{ current_end_time }}">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="number" class="form-label">Minutes orange :</label>
-                            <input type="number" id="number" name="warningMinutes"
-                                class="form-control form-control-lg bg-dark text-light"
-                                value="{{ current_warning_minutes }}">
-                        </div>
-                    </div>
-                    <p class="text-warning text-center mb-2">Attention, l'écran clignottera selon les paramètres définis
-                        dans la section principale.</p>
-                    <button type="submit" class="btn btn-primary w-100">Mettre à jour</button>
-                </form>
-            </div>
-        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="/monitor" class="btn btn-outline-light mt-3">Ouvrir le moniteur</a>
     </div>
 
     <footer class="bg-dark text-light text-center py-3 mt-5">
