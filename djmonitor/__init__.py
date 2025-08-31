@@ -14,6 +14,7 @@ Attributes:
     socketio (SocketIO): The SocketIO instance for real-time features.
 """
 
+from dotenv import load_dotenv
 import eventlet  # type: ignore
 
 eventlet.monkey_patch()
@@ -22,11 +23,17 @@ import os  # pylint: disable=wrong-import-position,wrong-import-order
 from flask import Flask  # pylint: disable=wrong-import-position
 from flask_socketio import SocketIO  # pylint: disable=wrong-import-position
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
+load_dotenv()
+
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
-app.config["SECRET_KEY"] = "secret!"
+
+secret_key = os.getenv("SECRET_KEY", None)
+if not secret_key:
+    raise RuntimeError("SECRET_KEY environment variable is missing.")
+
+app.config["SECRET_KEY"] = secret_key
 socketio = SocketIO(app)

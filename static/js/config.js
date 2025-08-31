@@ -112,11 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const hours = Math.floor(diff / 3600);
                 const minutes = Math.floor((diff % 3600) / 60);
                 const seconds = diff % 60;
+                countdown.classList.remove('text-light', 'text-warning', 'text-danger');
                 if (hours >= 1) {
                     countdown.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    countdown.classList.add('text-light');
                 } else {
                     countdown.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                    countdown.classList.remove('text-light', 'text-warning', 'text-danger');
                     if (diff <= 0) {
                         countdown.classList.add('text-danger');
                         countdown.textContent = '00:00';
@@ -127,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             } else {
-                countdown.classList.remove('text-warning');
+                countdown.classList.remove('text-light', 'text-warning');
                 countdown.classList.add('text-danger');
                 countdown.textContent = '00:00';
             }

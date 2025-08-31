@@ -4,3 +4,4 @@
 .venv
 
 config/config.json
+.env

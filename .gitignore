@@ -3,4 +3,5 @@
 .mypy_cache
 .venv
 
-config.json
+config/config.json
+.env
